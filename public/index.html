@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca del Juego</title>
+    <!-- Link a la librería de Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <!-- Link a la librería Bootstrap para estilos CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Archivo de estilos personalizados -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+      
+    </style>
+</head>
+<body>
+    <!-- Encabezado principal de la página -->
+    <header>
+        <h1>Biblioteca del Juego</h1>
+        <button id="addJuego" class= "btnadd"><i class="fas fa-plus"></i></button> <!-- Botón de añadir juego -->
+
+    </header>
+
+    <!-- Navegación con pestañas para seleccionar acciones -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <!-- Pestaña para listar juegos -->
+            <a class="nav-link active" id="listarJuegos" href="#">Juegos</a>
+        </li>
+        <li class="nav-item">
+            <!-- Pestaña para añadir un nuevo juego -->
+            <a class="nav-link" id="addJuego" href="#">Prestar</a>
+        </li>
+        <li class="nav-item">
+            <!-- Pestaña para buscar un juego por ID -->
+            <a class="nav-link" id="buscarId" href="#">Buscar por ID</a>
+        </li>
+    </ul>
+
+    <!-- Contenedor para mostrar las tarjetas de juegos -->
+    <div id="tarjetasJuegos" class="card-deck"></div>
+
+    <!-- Formulario para crear un nuevo juego -->
+    <div id="CrearJuego" class="formjuego" style="display: none;">
+        <form id="formCrearJuego">
+            <div class="form-group">
+                <label>juego</label>
+                <!-- Campo de texto para el nombre de juego -->
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre de juego">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputdescripcion1">Contraseña</label>
+                <!-- Campo para introducir la contraseña -->
+                <input type="descripcion" class="form-control" id="descripcion" placeholder="descripcion">
+            </div>
+            <!-- Botón para guardar el juego -->
+            <button type="submit" name="guardar" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+
+    <!-- Barra de navegación para buscar un juego por ID -->
+    <nav id="Buscarjuego" class="navbar navbar-light bg-light" style="display: none;">
+        <form class="form-inline">
+            <!-- Campo de búsqueda para ingresar el ID del juego -->
+            <input class="form-control mr-sm-2" id="juegoId" type="search" placeholder="Buscar" aria-label="Buscar">
+            <!-- Botón para realizar la búsqueda -->
+            <button class="btn btn-primary my-2 my-sm-0" type="submit" name="buscar">Buscar</button>
+        </form>
+    </nav>
+
+    <!-- Contenedor para mostrar resultados o mensajes de error -->
+    <div id="resultadoBusqueda" style="margin-top: 20px; display: none"></div>
+    <!-- Tarjeta para mostrar los datos de un juego específico -->
+    <div class="card" id="mostrarjuego" style="display: none"></div>
+
+
+          <!-- Modal para añadir juego -->
+          <div id="formModal" class="modal"  tabindex="0">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Nuevo Juego</h2>
+                <span class="close" id="cerrarModal">&times;</span>
+              </div>
+              <div class="modal-body">
+                <form id="crearEmpresaForm"  enctype="multipart/form-data">
+                  <!-- Campo oculto para el ID de la empresa -->
+                  <input type="hidden" id="empresaId" value=""> <!-- ID de la empresa -->
+                
+                  <div class="input-group" >
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="form-field" required>
+                  </div>
+                  <div class="input-group" >
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" id="descripcion" name="descripcion" class="form-field" required>
+                  </div>
+                  
+                  <!-- Añadir un contenedor para el mensaje de "No hay cambios" -->
+                  <div id="mensajeSinCambios" style="color: red; display: none; font-weight: bold; margin: 10px;">
+                    No se han realizado cambios.
+                  </div>
+                  <button type="submit" id="btn-guardar" class="btn btn-secondary ">Guardar</button>
+                  <button type="submit" id="btn-modificar" class="btn btn-secondary" style="display: none;" >Modificar</button>
+    
+                </form>
+              </div>
+            </div>
+          </div>          
+        </div>
+    
+        <!-- Modal para confirmar eliminación del juego -->
+        <div id="confirmEliminarModal" class="modal" style="display: none;">
+          <div class="modal-content">
+            <span class="close" id="cerrarDeleteModal">&times;</span>
+            <p>¿Estás seguro de que deseas eliminar este Juego?</p>
+            <div>
+              <button id="confirmEliminarButton" class="confirm-button">Eliminar</button>
+              <button id="cancelarElimButton" class="cancel-button">Cancelar</button>
+            </div>
+          </div>
+        </div>
+        <div id="successModal" class="modal" style="display: none;">
+          <div class="modal-content">
+            <span class="close" id="cerrarSuccessModal">&times;</span>
+            <p id="successModalMessage">¡Datos guardados correctamente!</p>
+          </div>
+        </div>
+
+    <!-- Librerías de JavaScript necesarias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Archivo de JavaScript para manejar la lógica del formulario y el modal -->
+    <script src="script.js"></script>
+</body>
+</html>
